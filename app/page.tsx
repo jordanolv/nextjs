@@ -1,23 +1,21 @@
-import { ButtonLink } from "@/components/ui/ButtonLink";
 import Title from "@/components/ui/Title";
 import Website from "@/components/ui/Website";
 import WebsiteHeader from "@/components/ui/WebsiteHeader";
-import { WebsiteType } from "@/types/Website";
+import type { WebsiteType } from "@/types/Website";
 
-export async function getStaticProps() {
-  const websites = await fetch("http://localhost:3000/websites.json").then(
-    (res) => res.json(),
-  );
-  return { props: { websites } };
+async function getWebsites(): Promise<WebsiteType[]> {
+  const res = await fetch("http://localhost:3000/websites.json");
+  if (!res.ok) {
+    throw new Error("Impossible de charger les sites web");
+  }
+  return res.json();
 }
 
-type HomePageType = {
-  websites: WebsiteType[];
-};
+export default async function HomePage() {
+  const websites = await getWebsites();
 
-export default function HomePage({ websites }: HomePageType) {
   return (
-    <main>
+    <>
       <WebsiteHeader website={websites[0]} />
 
       <div className="bg-white px-6 py-12">
@@ -36,9 +34,9 @@ export default function HomePage({ websites }: HomePageType) {
             ))}
         </div>
         <footer className="pt-12 flex justify-center">
-          <ButtonLink href="/websites" variant="link">
+          <a href="/websites" className="underline">
             Voir tous les sites
-          </ButtonLink>
+          </a>
         </footer>
       </div>
 
@@ -53,6 +51,7 @@ export default function HomePage({ websites }: HomePageType) {
           </video>
         </figure>
       </div>
-    </main>
+    </>
   );
 }
+
