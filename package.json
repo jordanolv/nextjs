@@ -5,17 +5,25 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:gh": "NEXT_PUBLIC_BASE_PATH=/next-formation next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
+    "@next/mdx": "^16.1.6",
     "@tailwindcss/postcss": "^4.2.1",
     "autoprefixer": "^10.4.27",
     "clsx": "^2.1.1",
+    "gray-matter": "^4.0.3",
     "next": "16.1.6",
+    "next-mdx-remote": "^6.0.0",
     "postcss": "^8.5.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
     "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
